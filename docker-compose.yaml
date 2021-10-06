@@ -1,0 +1,17 @@
+version: "2.1"
+services:
+  nginx:
+    image: sipstack/nginx
+    container_name: nginx
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - TZ=America/Toronto
+    volumes:
+      - /srv/nginx/log/:/var/log/nginx
+      - /srv/nginx/conf.d/:/etc/nginx/conf.d
+      - /srv/nginx/letsencrypt:/etc/letsencrypt
+    ports:
+      - 443:443
+      - 80:80
+    restart: unless-stopped

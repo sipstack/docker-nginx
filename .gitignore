@@ -1,0 +1,17 @@
+# files ############################
+.env
+*.pid
+*.seed
+*.pid.lock
+# ecosystem.config.js
+
+# specific folders #################
+/log/
+## .vscode/
+
+# folders ##########################
+.idea/
+node_modules/
+build/
+tmp/
+temp/
