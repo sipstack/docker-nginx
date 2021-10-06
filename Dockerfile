@@ -25,7 +25,6 @@ RUN set -x \
 # forward request and error logs to docker log collector
     && ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log \
-    && ln -sf /dev/stderr /var/log/nginx/access.json \
 
 # lets encrypt --------------------------------------
 ## generate 2048 dh parameters
