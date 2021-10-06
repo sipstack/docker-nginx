@@ -28,23 +28,7 @@ server {
 }
 EOF
 fi
-# TODO: fix to auto discover
-echo "resolver  127.0.0.11 valid=30s;" > /etc/nginx/conf.d/10-resolver.conf
-# if ! grep -q 'resolver' /etc/nginx/conf.d/10-resolver.conf; then
-#     RESOLVERRAW=$(awk 'BEGIN{ORS=" "} $1=="nameserver" {print $2}' /etc/resolv.conf)
-#     for i in ${RESOLVERRAW}; do
-#         if [ $(awk -F ':' '{print NF-1}' <<< ${i}) -le 2 ]; then
-#             RESOLVER="${RESOLVER} ${i}"
-#         fi
-#     done
-#     if [ -z "${RESOLVER}" ]; then
-#         RESOLVER="127.0.0.11"
-#     fi
-#     echo "Setting resolver to ${RESOLVER}"
-#     echo -e "# This file is auto-generated on start, based on the container's /etc/resolv.conf file. Feel free to modify it as you wish.\n\nresolver ${RESOLVER} valid=30s;" > /etc/nginx/conf.d/10-resolver.conf
-# fi
 
-# service nginx restart
 
 # default continued ---------------------------------------------
 if [ "$1" = "nginx" -o "$1" = "nginx-debug" ]; then

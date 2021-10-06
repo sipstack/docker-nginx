@@ -15,7 +15,7 @@ RUN set -x \
     # && adduser --system --disabled-login --ingroup nginx --no-create-home --home /nonexistent --gecos "nginx user" --shell /bin/false --uid 101 nginx \
     && apt-get update \
     && apt-get upgrade -y \
-    && apt-get install --no-install-recommends --no-install-suggests -y gnupg ca-certificates nano curl wget htop nginx nginx-extras certbot gettext-base \
+    && apt-get install --no-install-recommends --no-install-suggests -y gnupg ca-certificates nano curl wget htop nginx nginx-extras certbot gettext-base iputils-ping \
     # if [ "$NGINX_EXTRAS" -eq "true" ]; then \
     #     apt-get install --no-install-recommends --no-install-suggests -y nginx-extras 
     # fi
