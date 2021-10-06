@@ -10,6 +10,7 @@ else
 fi
 
 # run -----------------------------------------------------------
+# set default conf
 rm -rf /etc/nginx/sites-enabled/*
 if [ ! -f "/etc/nginx/conf.d/20-default.conf" ]; then
 tee /etc/nginx/conf.d/20-default.conf<<'EOF'
@@ -27,6 +28,21 @@ server {
 }
 EOF
 fi
+# Set resolver, ignore ipv6 addresses
+if ! grep -q 'resolver' /etc/nginx/conf.d/10-resolver.conf; then
+    RESOLVERRAW=$(awk 'BEGIN{ORS=" "} $1=="nameserver" {print $2}' /etc/resolv.conf)
+    for i in ${RESOLVERRAW}; do
+        if [ $(awk -F ':' '{print NF-1}' <<< ${i}) -le 2 ]; then
+            RESOLVER="${RESOLVER} ${i}"
+        fi
+    done
+    if [ -z "${RESOLVER}" ]; then
+        RESOLVER="127.0.0.11"
+    fi
+    echo "Setting resolver to ${RESOLVER}"
+    echo -e "# This file is auto-generated on start, based on the container's /etc/resolv.conf file. Feel free to modify it as you wish.\n\nresolver ${RESOLVER} valid=30s;" > /etc/nginx/conf.d/10-resolver.conf
+fi
+
 # service nginx restart
 
 # default continued ---------------------------------------------
