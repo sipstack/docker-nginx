@@ -10,6 +10,7 @@ else
 fi
 
 # run -----------------------------------------------------------
+rm -rf /etc/nginx/sites-enabled/*
 if [ ! -f "/etc/nginx/conf.d/20-default.conf" ]; then
 tee /etc/nginx/conf.d/20-default.conf<<'EOF'
 server {
@@ -26,7 +27,7 @@ server {
 }
 EOF
 fi
-service nginx start
+# service nginx restart
 
 # default continued ---------------------------------------------
 if [ "$1" = "nginx" -o "$1" = "nginx-debug" ]; then

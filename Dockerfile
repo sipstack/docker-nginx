@@ -5,11 +5,8 @@
 #
 FROM debian:buster-slim
 
-LABEL maintainer="Jonathan Geller <jgeller@telair.net>"
+LABEL maintainer="Jonathan Geller <jgeller@sipstack.com>"
 
-ENV NGINX_VERSION   1.21.3
-ENV NJS_VERSION     0.6.2
-ENV PKG_RELEASE     1~buster
 ENV NGINX_EXTRAS    false
 
 RUN set -x \

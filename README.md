@@ -7,7 +7,7 @@ Dockerized NGINX with Letsencrypt bundled
 ### Deploy with docker run
 
 ```
-docker run -d --name nginx -p 80:80 -p 443:443 -v /srv/nginx/log:/var/log/nginx -v /srv/nginx/conf.d:/etc/nginx/conf.d -v /srv/nginx/letsencrypt:/etc/letsencrypt sipstack/nginx
+docker run -d --name nginx -p 80:80 -p 443:443 -v /srv/nginx/log:/var/log/nginx -v /srv/nginx/conf.d:/etc/nginx/conf.d -v /srv/nginx/html:/var/www/html -v /srv/nginx/letsencrypt:/etc/letsencrypt sipstack/nginx
 ```
 
 ### Deploy with docker compose
@@ -25,6 +25,7 @@ services:
     volumes:
       - /srv/nginx/log/:/var/log/nginx
       - /srv/nginx/conf.d/:/etc/nginx/conf.d
+      - /srv/nginx/html:/var/www/html
       - /srv/nginx/letsencrypt:/etc/letsencrypt
     ports:
       - 443:443
