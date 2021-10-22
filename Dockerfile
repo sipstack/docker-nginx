@@ -21,11 +21,6 @@ RUN set -x \
     # fi
     && apt-get remove --purge --auto-remove -y \
 
-
-# forward request and error logs to docker log collector
-    && ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log \
-
 # lets encrypt --------------------------------------
 ## generate 2048 dh parameters
     && openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 \
@@ -39,6 +34,11 @@ RUN set -x \
 
 # extra
     && rm -rf /etc/nginx/sites-enabled/* \
+
+
+# forward request and error logs to docker log collector
+    && ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log \
 
 # create a docker-entrypoint.d directory
     && mkdir /docker-entrypoint.d
