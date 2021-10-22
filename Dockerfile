@@ -36,12 +36,15 @@ RUN set -x \
     && rm -rf /etc/nginx/sites-enabled/* \
 
 
-# forward request and error logs to docker log collector
-    && ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log \
+# forward request and error logs to docker log collector -- moved to run command
+    # && ln -sf /dev/stdout /var/log/nginx/access.log \
+    # && ln -sf /dev/stderr /var/log/nginx/error.log \
 
 # create a docker-entrypoint.d directory
     && mkdir /docker-entrypoint.d
+
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY assets/snippets/* /etc/nginx/snippets/
 COPY assets/sites-available/* /etc/nginx/sites-available/
