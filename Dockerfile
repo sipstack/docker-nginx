@@ -27,7 +27,9 @@ COPY entrypoint/docker-entrypoint.sh /
 COPY entrypoint/10-listen-on-ipv6-by-default.sh /docker-entrypoint.d
 COPY entrypoint/20-envsubst-on-templates.sh /docker-entrypoint.d
 COPY entrypoint/30-tune-worker-processes.sh /docker-entrypoint.d
-COPY entrypoint/80-letsencrypt.sh /docker-entrypoint.d
+
+COPY entrypoint/00-letsencrypt.sh /docker-entrypoint.d
+
 COPY snippets/* /etc/nginx/snippets/
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
