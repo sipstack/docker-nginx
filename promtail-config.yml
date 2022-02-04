@@ -1,0 +1,28 @@
+server:
+  http_listen_port: 0
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:9090/loki/api/v1/push ## change address to your loki server
+
+scrape_configs:
+  #- job_name: system
+  #  static_configs:
+  #  - targets:
+  #      - localhost
+  #    labels:
+  #      job: varlogs
+  #      __path__: /var/log/*log
+
+  - job_name: nginx
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: nginx_access_log
+          host: <your nginx hostname here> ## edge.example.com (for grafana identification)
+          agent: promtail
+          __path__: /var/log/nginx/*.json

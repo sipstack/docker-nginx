@@ -15,3 +15,13 @@ services:
       - 443:443
       - 80:80
     restart: unless-stopped
+
+  ## optional promtail if pairing with grafana dashboard
+  promtail:
+    image: grafana/promtail:latest
+    #container_name: promtail
+    volumes:
+      - /srv/nginx/log/:/var/log/nginx/:ro ## ensure same log path as declared in nginx volume
+      - /srv/nginx/promtail-config.yml:/etc/promtail/docker-config.yml ## copy file to persist changes across updates
+    restart: unless-stopped
+    command: -config.expand-env=true -config.file=/etc/promtail/docker-config.yml
