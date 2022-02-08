@@ -16,6 +16,7 @@
   if [ ! -f /etc/ssl/certs/dhparam.pem ]; then
     echo "deploy-hook = systemctl reload nginx" > /etc/letsencrypt/cli.ini
   fi
+update-ca-certificates
 
 # clean sites-enabled, as sites will be managed from conf.d (30-<domain>.conf) mapped from docker
   rm -rf /etc/nginx/sites-enabled/*
